@@ -3,6 +3,7 @@
 .project
 .classpath
 /.idea/
-/lib/dependency-reduced-pom.xml
+/lib/
+dependency-reduced-pom.xml
 pom.xml
 Hdfs2Hbase.iml
