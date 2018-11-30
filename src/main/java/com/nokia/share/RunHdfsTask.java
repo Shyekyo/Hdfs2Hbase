@@ -151,7 +151,7 @@ public class RunHdfsTask {
         return (Map<String, CompanyIPInfo>) map;
     }
 
-    public static Map<String,Map<String,String>> doCountry() {
+    public static Map<Integer,Map<String,String>> doCountry() {
         String dimensionDir="/stormDimension/country/";
         Path hdfsPath = new Path(Cnst.FS_DEFAULTFS+dimensionDir);
         Map<?,?> map =null;
@@ -175,7 +175,7 @@ public class RunHdfsTask {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return (Map<String, Map<String, String>>) map;
+        return (Map<Integer, Map<String, String>>) map;
     }
 
     public static Map<String,String> allMmeInfo() {
