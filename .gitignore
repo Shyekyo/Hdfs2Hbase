@@ -1,0 +1,8 @@
+/target/
+.settings
+.project
+.classpath
+/.idea/
+/lib/dependency-reduced-pom.xml
+pom.xml
+Hdfs2Hbase.iml
