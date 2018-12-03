@@ -25,15 +25,16 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class RunTask {
     public static void main(String[] args) {
         try {
-            String path = args[0];
-            String tableName = args[1];
-            String cf_default = args[2];
-            String attr = args[3];
-            String zk = args[4];
-            String flag = args[5];
+            String thread = args[0];
+            String path = args[1];
+            String tableName = args[2];
+            String cf_default = args[3];
+            String attr = args[4];
+            String zk = args[5];
+            String flag = args[6];
             String delRowKey ="";
             if("deldata".equals(flag)){
-                delRowKey = args[6];
+                delRowKey = args[7];
             }
             /*
              flag =  putall
@@ -57,7 +58,7 @@ public class RunTask {
                     try {
                     /*RunHdfsTask.getHdfsFileSystem(HdfsParams.getDefaultParams("weihu"));*/
 
-                        /*ExecutorService*/ThreadPoolExecutor pool = (ThreadPoolExecutor)Executors.newFixedThreadPool(15);
+                        /*ExecutorService*/ThreadPoolExecutor pool = (ThreadPoolExecutor)Executors.newFixedThreadPool(Integer.valueOf(thread));
                         //hbase
                         //HbaseE0984.createTable(config,tableName,cf_default);
                         HbaseE0984.createPartitionTable(config,tableName,cf_default,
