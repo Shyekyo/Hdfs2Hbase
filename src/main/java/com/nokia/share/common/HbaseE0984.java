@@ -144,11 +144,10 @@ public class HbaseE0984 {
             put.setWriteToWAL(false);
             list.add(put);
             if(num%1000==0){
-                table.put(put);
+                table.put(list);
                 list.clear();
                 table.flushCommits();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             try {

@@ -118,6 +118,9 @@ public class ToHbaseService implements Runnable{
                 }
                 hbaseE0984.addData2(table,tableName,rowKey,data,cf_default,attr,count,list);
             }
+            table.put(list);
+            list.clear();
+            table.flushCommits();
             in.close();
         }
         //==
