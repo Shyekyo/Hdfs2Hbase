@@ -52,6 +52,7 @@ public class RunTask {
             config.set("zookeeper.znode.parent", "/hbase-unsecure");
             config.setInt("hbase.rpc.timeout",20000);
             config.setInt("hbase.client.operation.timeout",30000);
+            config.setInt("hbase.client.keyvalue.maxsize",20971520);
 
             switch (flag) {
                 case "hdfs2hbase":
