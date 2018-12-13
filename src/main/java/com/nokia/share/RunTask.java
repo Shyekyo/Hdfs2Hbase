@@ -85,6 +85,7 @@ public class RunTask {
                         for(int i=0 ; i<size ;i++) {
                             pool.execute(new Thread(new ToHbaseService(fs,config,admin,tableName, cf_default, attr,stack)));
                         }
+                        pool.shutdown();
                         //toHbase(fs, hdfsPath,config,admin,tableName, cf_default, attr);
                         //hdfs
                     } catch (Exception e) {
