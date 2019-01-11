@@ -19,11 +19,14 @@ import java.util.Map;
 public class RunMapDB {
 
     public static void main(String[] args) {
-        File dbFile = new File("C:\\Users\\SongHyeKyo\\Desktop\\78abf1b0-6852-40ad-99c8-aeb0bc08c772.map");
-        DB db = DBMaker.newFileDB(dbFile).closeOnJvmShutdown().make();
-        BTreeMap dbMap = db.getTreeMap("Cache");
-        Iterator iterator = dbMap.entrySet().iterator();
-        System.out.println(dbMap.sizeLong());
+        //File dbFile = new File("D:\\78abf1b0-6852-40ad-99c8-aeb0bc08c772.map.p");
+        File dbFile = new File("D:\\78abf1b0-6852-40ad-99c8-aeb0bc08c772.map");
+        //DB db = DBMaker.newFileDB(dbFile).closeOnJvmShutdown().make();
+        DB db = DBMaker.fileDB(dbFile).make();
+        Object dbMap = db.get("78abf1b0-6852-40ad-99c8-aeb0bc08c772");
+        // BTreeMap dbMap = db.getTreeMap("a");
+        Iterator iterator = ((HTreeMap)dbMap).entrySet().iterator();
+        System.out.println(((HTreeMap)dbMap).sizeLong());
         while (iterator.hasNext()){
             System.out.println("key:"+iterator.next().toString().replace("=ArraySeq","  value:"));
         }
@@ -42,7 +45,7 @@ public class RunMapDB {
         }};
         //DB db = DBMaker.memoryDB().closeOnJvmShutdown().make();
 
-        /*DB db = DBMaker.fileDB(getHdfsPath().toString()).fileMmapEnableIfSupported().make();
+        DB db = DBMaker.fileDB("D:\\aaa.db").fileMmapEnableIfSupported().make();
         HTreeMap<String, SgwInfo> map =
                 db.hashMap("sgw", Serializer.STRING, Serializer.JAVA).
                         createOrOpen();
@@ -59,7 +62,7 @@ public class RunMapDB {
         Map sgw = (Map) db.get("sgw");
         System.out.println(sgw.get("a"));
 
-        db.close();*/
+        db.close();
     }
 
     private static Path getHdfsPath() {
