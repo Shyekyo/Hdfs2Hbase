@@ -6,20 +6,30 @@ import com.nokia.share.Emodel.HdfsParams;
 import com.nokia.share.hcnst.Cnst;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.mapdb.DB;
-import org.mapdb.DBMaker;
-import org.mapdb.HTreeMap;
-import org.mapdb.Serializer;
+import org.mapdb.*;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
  * Created by zhangxiaofan on 2018/11/13.
  */
 public class RunMapDB {
+
     public static void main(String[] args) {
+        File dbFile = new File("C:\\Users\\SongHyeKyo\\Desktop\\78abf1b0-6852-40ad-99c8-aeb0bc08c772.map");
+        DB db = DBMaker.newFileDB(dbFile).closeOnJvmShutdown().make();
+        BTreeMap dbMap = db.getTreeMap("Cache");
+        Iterator iterator = dbMap.entrySet().iterator();
+        System.out.println(dbMap.sizeLong());
+        while (iterator.hasNext()){
+            System.out.println("key:"+iterator.next().toString().replace("=ArraySeq","  value:"));
+        }
+    }
+
+    public static void bak(String[] args) {
         Map<String, SgwInfo> m = new HashMap<String, SgwInfo>(){{
            put("a",new SgwInfo("sd","sd","sd"));
            put("b",new SgwInfo("we","we","We"));
@@ -32,8 +42,8 @@ public class RunMapDB {
         }};
         //DB db = DBMaker.memoryDB().closeOnJvmShutdown().make();
 
-        DB db = DBMaker.fileDB(getHdfsPath().toString()).fileMmapEnableIfSupported().make();
-        /*HTreeMap<String, SgwInfo> map =
+        /*DB db = DBMaker.fileDB(getHdfsPath().toString()).fileMmapEnableIfSupported().make();
+        HTreeMap<String, SgwInfo> map =
                 db.hashMap("sgw", Serializer.STRING, Serializer.JAVA).
                         createOrOpen();
         map.putAll(m);
@@ -44,12 +54,12 @@ public class RunMapDB {
         SgwInfo a = map.get("a");
         System.out.println(a);
         TerminalInfo a1 = map1.get("a");
-        System.out.println(a1);*/
+        System.out.println(a1);
         System.out.println(db.exists("sgw"));
         Map sgw = (Map) db.get("sgw");
         System.out.println(sgw.get("a"));
 
-        db.close();
+        db.close();*/
     }
 
     private static Path getHdfsPath() {
