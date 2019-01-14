@@ -20,10 +20,10 @@ public class RunMapDB {
 
     public static void main(String[] args) {
         //File dbFile = new File("D:\\78abf1b0-6852-40ad-99c8-aeb0bc08c772.map.p");
-        File dbFile = new File("D:\\78abf1b0-6852-40ad-99c8-aeb0bc08c772.map");
+        File dbFile = new File("D:\\e582b358-268e-40a8-8e40-3276324d8e64.map");
         //DB db = DBMaker.newFileDB(dbFile).closeOnJvmShutdown().make();
         DB db = DBMaker.fileDB(dbFile).make();
-        Object dbMap = db.get("78abf1b0-6852-40ad-99c8-aeb0bc08c772");
+        Object dbMap = db.get("e582b358-268e-40a8-8e40-3276324d8e64.map");
         // BTreeMap dbMap = db.getTreeMap("a");
         Iterator iterator = ((HTreeMap)dbMap).entrySet().iterator();
         System.out.println(((HTreeMap)dbMap).sizeLong());
